@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>My first three.js app</title>
+    <style>
+      body { margin: 0; }
+canvas { width: 100vw; height: 100vh; display: block; }
+    </style>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
-
-  <title>I HAVE A TITLE :) Please give a grade from me.</title>
-
-  <!-- CSS stylesheet(s) -->
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-
-  <!-- Library script(s) -->
-
-  <!-- p5.min.js is the main p5 library -->
-  <script src="js/libraries/p5.min.js"></script>
-  <!-- p5.sound.min.js allows us to use sound -->
-  <script src="js/libraries/p5.sound.min.js"></script>
-
-  <!-- My script(s) -->
-  <script src="js/script.js"></script>
-</head>
-
-<body>
-  <!-- HTML would go here if needed. -->
-</body>
-
+	<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@v0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.180.0/examples/jsm/"
+  }
+}
+</script>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>
+    
