@@ -98,7 +98,8 @@ function main() {
     const geometry = new THREE.BoxGeometry(box_size_x, box_size_y, box_size_z);
     // const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 }); // greenish blue
     const material = new THREE.MeshStandardMaterial(); // greenish blue
-    material.color.set(0.5, 0.5, 1)
+    // material.color.set(0.5, 0.5, 1)
+    material.color.set(1,0,0)
     // material.transparent = true
     // material.opacity = 0.5
 
