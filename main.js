@@ -91,15 +91,14 @@ function main() {
     const axesHelper = new THREE.AxesHelper(15);
     scene.add(axesHelper)
 
-    let box_size_x = 3
+    let box_size_x = 1
     let box_size_y = 6;
-    let box_size_z = 3;
+    let box_size_z = 1;
 
     const geometry = new THREE.BoxGeometry(box_size_x, box_size_y, box_size_z);
     // const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 }); // greenish blue
     const material = new THREE.MeshStandardMaterial(); // greenish blue
-    // material.color.set(0.5, 0.5, 1)
-    material.color.set(1,0,0)
+    material.color.set(0.5, 0.5, 1)
     // material.transparent = true
     // material.opacity = 0.5
 
@@ -113,7 +112,7 @@ function main() {
 
     first_cube.userData.h = 1
 
-    const total_num_cubes = 2 ** 8
+    const total_num_cubes = 2 ** 6
     // const total_num_cubes = 3
 
     let top_cubes = [first_cube]
@@ -150,7 +149,7 @@ function main() {
             
 
             for (let non_branch = 0; non_branch < non_branch_length; non_branch++){
-            
+                continue
                 let geo = new THREE.BoxGeometry(box_size_x, box_size_y, box_size_z)
                 let cube_new = new THREE.Mesh(geo, material)
                 cube_new.position.y = box_size_y 
@@ -164,18 +163,31 @@ function main() {
                 top_cube = cube_new
             }
 
+            let g = new THREE.Group()
+            let s
+            s = THREE.MathUtils.mapLinear(i, 0, temp_top_cubes.length,   Math.PI / 3, 0)
             for (let b = 0; b < 2; b++) {
+                // s = THREE.MathUtils.mapLinear(cube_counter, 0, total_num_cubes*2,  Math.PI /5, Math.PI /8)
+
+                // s = THREE.MathUtils.mapLinear(i, 0, temp_top_cubes.length,   Math.PI / 1.5, 0)
+
+                let cube_counter_fract = 3
 
                 let x_rot = pi / 180 * 0
-                let y_rot = pi / 180 * 30
-                let z_rot = pi / 180 * 30
-                // let scale = Math.sqrt(0.5 ** 2 + 0.5 ** 2) // for 45 degrees
-                let scale = 1
+                let y_rot = pi / 180 * 0
+                let z_rot = pi / 180  * 30
+                let scale = Math.sqrt(0.5 ** 2 + 0.5 ** 2) // for 45 degrees
+                // let scale = 1
 
+                if (cube_counter < 2**3 - 1){
+                    
+                }else{
+                    
+                }
 
                 let geo = new THREE.BoxGeometry(box_size_x, box_size_y, box_size_z)
 
-
+                
 
                 // let mat = new THREE.MeshStandardMaterial(); // greenish blue
                 // mat.color.set(0.5, 0.5, 1)                
@@ -187,47 +199,68 @@ function main() {
                 // Math.random())
 
                 let cube_new = new THREE.Mesh(geo, material)
+                
+                
 
-                top_cube.add(cube_new)
-
-                cube_new.position.y = box_size_y
+                cube_new.position.y = box_size_y + box_size_x /2
 
 
 
+                // cube_new.geometry.translate(box_size_x / 2, box_size_y / 2, 0)
                 cube_new.geometry.translate(box_size_x / 2, box_size_y / 2, 0)
 
 
+                
 
                 if (b == 0) {
-                    cube_new.rotation.y = y_rot
-                    cube_new.rotation.x = x_rot
+                    cube_new.position.x = box_size_x  * -1
+
+                    
                 } else {
-                    cube_new.rotation.y = y_rot + pi
-                    cube_new.position.x = box_size_x
-                    cube_new.rotation.x = x_rot * -1
+                    cube_new.position.x = box_size_x 
+                    
+                    cube_new.rotation.y = pi 
+                    
+
 
 
                 }
 
-                cube_new.rotation.z = z_rot
+                // cube_new.rotation.z = pi / 180 * 20
+                // cube_new.rotation.z = pi / 5
+                cube_new.rotation.z = s * 0.7
 
-                // cube_new.scale.setScalar(scale)
 
-
+                
 
                 let coord = new THREE.AxesHelper(15);
-                // cube_new.add(coord)
-
-
-                //  if (cube_counter == 6) {
-                // box_size_x /= 2
-                // box_size_y /= 2
-                // box_size_z /= 2
-                // }
-                cube_new.scale.setScalar(0.9)
+                
+                
                 top_cubes.push(cube_new)
+                
+                g.add(cube_new)
+                
+
                 cube_counter = cube_counter + 1
             }
+            
+            // let c = new THREE.AxesHelper(15)
+            // c.position.y = box_size_y
+            // g.add(c)
+
+            g.position.x = box_size_x /2
+            
+            
+            // g.rotation.y = pi / 180 * 10
+
+            g.rotation.y = s 
+
+            // g.rotation.y = pi/20
+
+            
+            top_cube.add(g)
+
+
 
         }
 
